@@ -1,0 +1,48 @@
+{
+    "items": {
+"toppings": [
+    {
+        "id": 1,
+        "name": "Pepperoni",
+        "price": 2
+        
+    },
+     {
+        "id": 2,
+        "name": "Mozzarella",
+        "price": 2
+    }
+
+],
+"size": [
+    {
+        "id": 1,
+        "name": "Small",
+        "price": 15 
+    },
+        {
+        "id": 2,
+        "name": "Medium",
+        "price": 20 
+    },
+        {
+        "id": 3,
+        "name": "Large",
+        "price": 25 
+    }
+],
+"base": [
+    {
+        "id": 1,
+        "name": "Tomato",
+        "price": 5 
+    },
+    {
+        "id": 2,
+        "name": "Plain",
+        "price": 5 
+    }
+]
+    }
+
+}
