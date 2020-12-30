@@ -14,10 +14,12 @@
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/pizzaShop.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/customerCode.js"></script>
   <!-- Page Content -->
   <div class="container">
     <div class="row">
@@ -26,38 +28,34 @@
         <p class="lead">Order a pizza</p>
       </div>
         <div class="col-lg-6 text-center center-page">
-            <form enctype="application/json" action="/orders" method="post">
+            <form id='myForm' enctype="application/json" action="/orders" method="post">
                 <div class="form-group">
-                    <select class="form-control" name="size">
-                        <option value="Large">Large</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Small">Small</option>
-                    </select>
+                    <h3>Size</h3>
+                    <div id="size" class="checkbox-group required" type="select" multiple=false>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="base">
-                        <option value="Tomato">Tomato</option>
-                        <option value="Plain">Plain</option>
-                    </select>
+                    <h3>Base</h3>
+                    <div id="base" class="checkbox-group required"></div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="toppings[]" multiple>
-                        <option value="Pepperoni">Pepperoni</option>
-                        <option value="Ham">Ham</option>
-                        <option value="Cheese">Cheese</option>
-                    </select>
+                    <h3>Toppings</h3>
+                    <div id="topping" class="checkbox-group required"></div>
                 </div>
                 
                 <div class="form-group">
-                    <input class="form-control" type="text" name="address" placeholder="Address">
+                    <h3>Address</h3>
+                    <input id="address" class="form-control" type="text" name="address" placeholder="Address">
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" type="text" name="price" placeholder="Price">
+                    <h3>Price €</h3>
+                    <input id="price" class="form-control" type="text" name="price" placeholder="Price" readonly>
                 </div>
                 <button type="submit" class="btn btn-block btn-primary">Order</button>
             </form>
-            <button id="restart" class="btn btn-block btn-danger">Restart</button>
+            <button id="restart" class="btn btn-block btn-danger" onclick="clearFields()">Restart</button>
+            <a class="btn btn-info next-btn" href="admin-page.html">ADMIN PAGE</a>  
             
         </div>
     </div>
@@ -65,12 +63,11 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">&copy; 2019</span>
+        <span class="text-muted">&copy; 2020</span>
       </div>
     </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

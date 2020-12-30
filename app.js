@@ -24,11 +24,12 @@ app.get('/', function(req, res){
 })
 
 // app.get('/admin', function(req, res){
+//     res.setHeader('Content-type', 'text/html');
 //     res.render('admin-page');
 // })
 
 // app.get('/customer', function(req, res){
-//     res.render('customer-page');
+//     res.render('customer-page.html');
 // })
 
 
@@ -52,31 +53,103 @@ app.post('/orders', function(req, res){
     const price = req.body.price;
     const address = req.body.address;
 
-    res.setHeader('Content-type', 'text/plain');
+    res.setHeader('Content-type', 'text/json');
     let file = fs.readFileSync('./orders.json', 'utf-8');
 
     const json = JSON.parse(file);
 
-    json.pizzas.push({"size": size, "base": base, "toppings": toppings, "price": parseInt(price), "address": address})
+    const lastId = Number(json.pizzas[json.pizzas.length - 1].id);
+
+    json.pizzas.push({"id": lastId + 1, "size": size, "base": base, "toppings": toppings, "price": parseInt(price), "address": address})
 
     file = fs.writeFileSync('./orders.json', JSON.stringify(json));
 
-    res.send('Order sent!');
+    res.send({
+        status: 200,
+        message: 'Order placed Successfully'
+    });
 })
 
-app.put('/items', function(req, res){
-    const items = req.items;
+app.delete('/orders', function(req, res){
+    const id = req.body.id;
+    let file = fs.readFileSync('./orders.json', 'utf-8');
+    console.log('deleting')
+    const json = JSON.parse(file);
+    const pizzas = json.pizzas;
+    const filteredJson = pizzas.filter(elem => {
+        return elem.id != id;
+    })
 
-    res.setHeader('Content-type', 'text/plain');
+    file = fs.writeFileSync('./orders.json', JSON.stringify({
+        pizzas: filteredJson
+    }));
+
+    res.setHeader('Content-type', 'text/json');
+    res.send({
+        status: 200,
+        message: 'Order Sent Successfully'
+    });
+})
+
+app.post('/item', function(req, res){
+    const id = req.body.id;
+    const name = req.body.name;
+    const section = req.body.section;
+    const price = req.body.price;
+
+
+    res.setHeader('Content-type', 'text/json');
+    let file = fs.readFileSync('./items.json', 'utf-8');
+
+    const json = JSON.parse(file);
+    if ( section=='base') json.items.base.push({id, name, price})
+    if ( section=='topping') json.items.topping.push({id, name, price})
+    if ( section=='size') json.items.size.push({id, name, price})
+
+    file = fs.writeFileSync('./items.json', JSON.stringify(json));
+
+    res.send({
+        status: 200,
+        message: 'Item Added Successfully'
+    });
+    console.log('Item added')
+})
+
+
+app.put('/item', function(req, res){
+    const item = req.body.item;
+    const section = (req.body.section).toLowerCase();
+    let secGroup;
+    console.log(section)
+    console.log(item)
+    res.setHeader('Content-type', 'text/json');
     let file = fs.readFileSync('./items.json', 'utf-8');
 
     const json = JSON.parse(file);
 
-    json.items = items;
+    if (section =='base') secGroup = json.items.base;
+    if (section =='topping') secGroup = json.items.topping;
+    if (section =='size') secGroup = json.items.size;
+
+    console.log(secGroup)
+
+    secGroup.forEach(elem => {
+        if(elem.id == item.id) {
+            console.log(elem)
+            console.log('Item found')
+            elem = item;
+            console.log(elem)
+        }
+    });
+
+    console.log(json)
 
     file = fs.writeFileSync('./items.json', JSON.stringify(json));
 
-    res.send('Items saved Successfully');
+    res.send({
+        status: 200,
+        message: 'Item updated Successfully'
+    });
 })
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {

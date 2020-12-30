@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>IWA Demo App</title>
+  <title>Admin</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -15,7 +15,105 @@
 </head>
 
 <body>
-  <div id="size-table"></div>
+    <div class="tables-container">
+        <table id="tableSize">
+            <h2 class="table-title">Sizes</h2>
+      <thead>
+          <th scope="col">
+              #
+            </th>
+            <th scope="col" class="section">
+                Size
+            </th>
+            <th scope="col">
+                Price
+            </th>
+            <th scope="col">
+                
+            </th>
+            <th scope="col">
+                
+            </th>
+        </thead>
+        <tbody id="tableBodySize">
+        </tbody>
+        
+        <table id="tableBase">
+            <h2 class="table-title">Bases</h2>
+            <thead>
+                <th scope="col">
+                    #
+                </th>
+                <th scope="col" class="section">
+                    Base
+                </th>
+                <th scope="col">
+                    Price
+                </th>
+                <th scope="col">
+                    
+                </th>
+                <th scope="col">
+                    
+                </th>
+            </thead>
+            <tbody id="tableBodyBase">
+            </tbody>
+            
+            
+            <table id="tableToppings">
+                <h2 class="table-title">Toppings</h2>
+                <thead>
+        <th scope="col">
+            #
+        </th>
+        <th scope="col" class="section">
+            Topping
+        </th>
+        <th scope="col">
+            Price
+        </th>
+        <th scope="col">
+            
+        </th>
+        <th scope="col">
+            
+        </th>
+    </thead>
+    <tbody id="tableBodyToppings">
+    </tbody>
+  </table>
+  </div>
+<div class="orders-container">
+    <table id="tableOrders">
+        <h2 class="table-title">Orders</h2>
+        <thead>
+            <th scope="col">
+                #
+            </th>
+            <th scope="col" class="section">
+                Size
+            </th>
+            <th scope="col">
+                Base
+            </th>
+            <th scope="col">
+                Toppings
+            </th>
+            <th scope="col">
+                Price
+            </th>
+            <th scope="col">
+                Address
+            </th>
+            <th scope="col"></th>
+        </thead>
+        <tbody id="tableBodySize">
+        </tbody>
+         
+    </table>
+    <a class="btn btn-info next-btn" href="customer-page.html">CUSTOMER PAGE</a>  
+</div>
 
   <!-- Bootstrap core JavaScript -->
   <script src="js/bootstrap.min.js"></script>
