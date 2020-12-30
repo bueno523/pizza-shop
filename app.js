@@ -137,7 +137,8 @@ app.put('/item', function(req, res){
         if(elem.id == item.id) {
             console.log(elem)
             console.log('Item found')
-            elem = item;
+            elem.name = item.name;
+            elem.price = item.price;
             console.log(elem)
         }
     });
