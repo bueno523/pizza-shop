@@ -23,17 +23,6 @@ app.get('/', function(req, res){
     res.render('index');
 })
 
-// app.get('/admin', function(req, res){
-//     res.setHeader('Content-type', 'text/html');
-//     res.render('admin-page');
-// })
-
-// app.get('/customer', function(req, res){
-//     res.render('customer-page.html');
-// })
-
-
-
 app.get('/orders', function(req, res){
     const file = fs.readFileSync('./orders.json', 'utf-8');
     res.setHeader('Content-type', 'text/json');
@@ -134,12 +123,11 @@ app.put('/item', function(req, res){
     console.log(secGroup)
 
     secGroup.forEach(elem => {
-        if(elem.id == item.id) {
-            console.log(elem)
-            console.log('Item found')
-            elem.name = item.name;
-            elem.price = item.price;
-            console.log(elem)
+        if(elem != null){
+            if(elem.id == item.id) {
+                elem.name = item.name;
+                elem.price = item.price;
+            }
         }
     });
 
@@ -150,6 +138,37 @@ app.put('/item', function(req, res){
     res.send({
         status: 200,
         message: 'Item updated Successfully'
+    });
+})
+
+app.delete('/item', function(req, res){
+    const id = req.body.id;
+    const section = (req.body.section).toLowerCase();
+    let secGroup;
+
+    let file = fs.readFileSync('./items.json', 'utf-8');
+    console.log('deleting item')
+    const json = JSON.parse(file);
+
+    if (section =='base') secGroup = json.items.base;
+    if (section =='topping') secGroup = json.items.topping;
+    if (section =='size') secGroup = json.items.size;
+    console.log(secGroup.length);
+
+    for(let k=0; k<secGroup.length; k++ ){
+        if(secGroup[k].id == id){
+            delete secGroup[k];
+        }
+    }
+
+    file = fs.writeFileSync('./items.json', JSON.stringify({
+        items: json.items
+    }));
+
+    res.setHeader('Content-type', 'text/json');
+    res.send({
+        status: 200,
+        message: 'Order Sent Successfully'
     });
 })
 

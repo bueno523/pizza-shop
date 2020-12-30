@@ -25,7 +25,7 @@ function loadTable(data, position){
     if (position == 3) table = document.getElementById('tableToppings');
 
     data.forEach(item => {
-        populateRow(table, item);
+        if(item != null) populateRow(table, item);
     });
     let emptyElem = {
         id: table.rows.length,
@@ -126,10 +126,20 @@ function updateRow(event){
 }
 
 function deleteRow(event){
-        // id of the row
     let id = getRowId(event);
-    // section name
     let section = getTableSection(event);
+    fetch('/item', {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({id, section})
+    }).then(res => res.json()).then(data => {
+        alert(data.message);
+        if (data.status == 200) {
+            location.reload();
+        }
+    })
 }
 
 function addRow(event){

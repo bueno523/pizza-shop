@@ -23,26 +23,27 @@ function loadForm(data, position){
     if (position == '3') elem = document.getElementById('topping');
 
     data.forEach(element => {
-        let div = document.createElement('div');
-        div.classList.add('checkbox');
-        let input = document.createElement('input');
-        let label = document.createElement('label');
-        input.type = "checkbox";
-        input.setAttribute('data-price', element.price);
-        input.id = element.name
-        input.value = element.name;
-        if(position=='1') input.name = 'size';
-        if(position=='2') input.name = 'base';
-        if(position=='3') input.name = 'topping';
-        
+        if(element != null) {
+            let div = document.createElement('div');
+            div.classList.add('checkbox');
+            let input = document.createElement('input');
+            let label = document.createElement('label');
+            input.type = "checkbox";
+            input.setAttribute('data-price', element.price);
+            input.id = element.name
+            input.value = element.name;
+            if(position=='1') input.name = 'size';
+            if(position=='2') input.name = 'base';
+            if(position=='3') input.name = 'topping';
+            
 
-        label.for = element.name;
-        label.innerText = element.name;
+            label.for = element.name;
+            label.innerText = element.name;
 
-        div.appendChild(input);
-        div.appendChild(label);
-        elem.appendChild(div);
-
+            div.appendChild(input);
+            div.appendChild(label);
+            elem.appendChild(div);
+        }
     });
 
 }
