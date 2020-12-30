@@ -58,6 +58,7 @@ $(document).ready(function() {
         var url = form.attr('action');
 
         var toppings = [];
+        // this part got from https://gist.github.com/batandwa/3135981
         $.each($("input[name='topping']:checked"), function(){
             toppings.push($(this).val());
 
@@ -75,6 +76,8 @@ $(document).ready(function() {
 
         var address = document.getElementById('address').value;
         var price = document.getElementById('price').value;
+
+        // I have copied and modifyed this part of ajax call from https://stackoverflow.com/questions/425095/submit-form-using-ajax-and-jquery
 
         if(inputsAreValid()){
             $.ajax({
@@ -107,18 +110,16 @@ function clearFields(){
     document.getElementById('address').value = '';
 }
 
+// I have got inspiration from this thread for this part https://stackoverflow.com/questions/5229023/how-do-i-check-uncheck-all-checkboxes-with-a-button-using-jquery
 function addCheckBoxListener(){
-            // the selector will match all input controls of type :checkbox
-        // and attach a click event handler 
+
         $("input:checkbox").on('click', function() {
-        // in the handler, 'this' refers to the box clicked on
+
         var $box = $(this);
         if ($box.is(":checked") ) {
-            // the name of the box is retrieved using the .attr() method
-            // as it is assumed and expected to be immutable
+
             var group = "input:checkbox[name='" + $box.attr("name") + "']";
-            // the checked state of the group/box on the other hand will change
-            // and the current value is retrieved using .prop() method
+
             if($box.attr("name") != 'topping'){
                 $(group).prop("checked", false);
             }

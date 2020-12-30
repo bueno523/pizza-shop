@@ -1,13 +1,12 @@
+// I have get most of this code from lecturer Mihail Timotev code. 
 
 var http = require('http'),
     path = require('path'),
     express = require('express'),
     bodyParser = require('body-parser'),
     fs = require('fs'),
-    expAutoSan = require('express-autosanitizer'),
-    tabulator = require('tabulator-tables');
+    expAutoSan = require('express-autosanitizer');
     
-
 var app = express();
 var server = http.createServer(app);
 
@@ -16,8 +15,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 app.use(expAutoSan.allUnsafe);
-
-
 
 app.get('/', function(req, res){
     res.render('index');

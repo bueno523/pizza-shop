@@ -75,3 +75,14 @@ table, th, td {
     font-size: 30px;
     font-weight: bold;
 }
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px;
+}
+
+.message {
+    text-align: center;
+}
